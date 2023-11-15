@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from nisystemlink.clients.core._uplink._json_model import JsonModel
 from pydantic import Field, conint
@@ -74,6 +74,7 @@ class V1Operations(JsonModel):
 
 class Operations1(JsonModel):
     get_results: Optional[Operation] = Field(None, alias='getResults')
+    get_results_property_keys: Optional[Operation] = Field(None, alias="getResultsPropertyKeys")
     query_results: Optional[Operation] = Field(None, alias='queryResults')
     create_results: Optional[Operation] = Field(None, alias='createResults')
     update_results: Optional[Operation] = Field(None, alias='updateResults')
@@ -321,7 +322,8 @@ class ProductRequestObject(JsonModel):
         None, alias='fileIds', example=['5ccb19ce5aa0a3348872c3e3']
     )
     """
-    Array of file IDs attached to the product. This API does not verify that the file IDs included exist.
+    Array of file IDs attached to the product. This API does not verify that the 
+    file IDs included exist.
     """
 
 
@@ -360,7 +362,8 @@ class ProductResponseObject(JsonModel):
         None, alias='fileIds', example=['5e30934193cac8046851acb2']
     )
     """
-    Array of file IDs attached to the product. This API does not verify that the file IDs included exist.
+    Array of file IDs attached to the product. This API does not verify that the 
+    file IDs included exist.
     """
 
 
@@ -389,7 +392,8 @@ class ProductUpdateRequestObject(JsonModel):
         None, alias='fileIds', example=['5e30934193cac8046851acb2']
     )
     """
-    Array of file IDs attached to the product. This API does not verify that the file IDs included exist.
+    Array of file IDs attached to the product. This API does not verify that the file IDs included
+    exist.
     """
 
 
@@ -431,13 +435,15 @@ class TestResultRequestObject(JsonModel):
         None, alias='fileIds', example=['5e30934193cac8046851acb2']
     )
     """
-    Array of file ids attached to the test result. This API does not verify that the file IDs included exist.
+    Array of file ids attached to the test result. This API does not verify that the file IDs 
+    included exist.
     """
     data_table_ids: Optional[List[str]] = Field(
         None, alias='dataTableIds', example=['62333547f7521f2f2f4615e5']
     )
     """
-    Array of data table ids attached to the test result. This API does not verify that the data table IDs included exist.
+    Array of data table ids attached to the test result. This API does not verify that the data 
+    table IDs included exist.
     """
     started_at: Optional[datetime] = Field(
         None, alias='startedAt', example='2018-05-07T18:58:05.219692Z'
@@ -690,7 +696,7 @@ class UpdateTestResultsRequest(JsonModel):
     """
     Array of test results to update
     """
-    replace: Optional[bool] = False
+    replace: Optional[bool]
     """
     Replace the existing fields instead of merging them
     """
@@ -775,7 +781,7 @@ class ProductsAdvancedQuery(JsonModel):
     """
     Specifies the product fields to project. When a field value is given here, the corresponding field will be present in all returned products, and all unspecified fields will be excluded. If no projection is specified, all product fields will be returned.
     """
-    take: Optional[conint(ge=-1)] = Field(1000, example=1000)
+    take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of products to return.
     """
@@ -811,7 +817,7 @@ class PathsAdvancedQuery(JsonModel):
     """
     Specifies the path fields to project. When a field value is given here, the corresponding field will be present in all returned paths, and all unspecified fields will be excluded. If no projection is specified, all path fields will be returned.
     """
-    take: Optional[conint(ge=-1)] = Field(1000, example=1000)
+    take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of paths to return.
     """
@@ -835,7 +841,7 @@ class ResultsAdvancedQuery(JsonModel):
     """
     The result query filter in Dynamic Linq
     """
-    substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=[2.5])
+    substitutions: Optional[List[Union[int, str]]] = Field(None, example=[2.5])
     """
     Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
     """
@@ -845,8 +851,8 @@ class ResultsAdvancedQuery(JsonModel):
     """
     The product query filter in Dynamic Linq
     """
-    product_substitutions: Optional[List[Dict[str, Any]]] = Field(
-        None, alias='productSubstitutions', example=['cRIO']
+    product_substitutions: Optional[List[Union[int, str]]] = Field(
+        None, alias="productSubstitutions", example=["cRIO"]
     )
     """
     Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
@@ -867,7 +873,7 @@ class ResultsAdvancedQuery(JsonModel):
     """
     Specifies the result fields to project. When a field value is given here, the corresponding field will be present in all returned results, and all unspecified fields will be excluded. If no projection is specified, all result fields will be returned.
     """
-    take: Optional[conint(ge=-1)] = Field(1000, example=1000)
+    take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of products to return.
     """
@@ -918,7 +924,7 @@ class StepsAdvancedQuery(JsonModel):
     """
     Specifies the step fields to project. When a field value is given here, the corresponding field will be present in all returned steps, and all unspecified fields will be excluded. If no projection is specified, all step fields will be returned.
     """
-    take: Optional[conint(ge=-1)] = Field(1000, example=1000)
+    take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of steps to return.
     """
@@ -957,7 +963,7 @@ class ResultValuesQuery(JsonModel):
     """
     A Dynamic Linq query which specifies the results to consider when getting values.
     """
-    substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=[2.5])
+    substitutions:  Optional[List[Union[int, str]]] = Field(None, example=[2.5])
     """
     Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
     """
@@ -1170,5 +1176,5 @@ class TestStepResponseObject(JsonModel):
     """
 
 
-Error.model_rebuild()
-TestStepRequestObject.model_rebuild()
+# Error.model_rebuild()
+# TestStepRequestObject.model_rebuild()
