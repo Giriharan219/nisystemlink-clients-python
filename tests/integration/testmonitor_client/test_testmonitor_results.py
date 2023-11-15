@@ -10,7 +10,6 @@ from nisystemlink.clients.testmonitor import TestMonitorClient
 from nisystemlink.clients.testmonitor.models import (
     CreateTestResultsRequest,
     DeleteResultsRequest,
-    ResultField,
     ResultQueryOrderByField,
     ResultsAdvancedQuery,
     ResultValuesQuery,
@@ -22,33 +21,26 @@ from nisystemlink.clients.testmonitor.models import (
     TestResultUpdateRequestObject,
     UpdateTestResultsRequest,
 )
+from tests.integration.testmonitor_client.constants import (
+    CreateResultRequest,
+    QueryResults,
+    UpdateResults,
+)
 
-api_info = AuthClient().get_auth()
-if api_info.workspaces is not None:
-    WORK_SPACE_ID = api_info.workspaces[0].id
 
-# Constants used in request and response.
-PART_NUMBER_PREFIX = "Test"
-PROGRAM_NAME = "_TEST_RESULT"
-TEST_KEYWORD = ["TestKeyword"]
-PROPERTY = {"TestKey": "TestValue"}
-FILTER = "programName == @0"
-SUBSTITUTIONS = [PROGRAM_NAME]
-PROJECTION = [ResultField.PROGRAM_NAME]
-TAKE_COUNT = 1000
-STATUS_TYPE = "PASSED"
-STATUS_NAME = "passed"
-HOST_NAME = "My-Host"
+def get_workspace_id() -> str:
+    """Get Workspace ID.
 
-TOTAL_TIME_IN_SECONDS = 2.7
-INVALID_ID = "invalid_id12323"
-MAX_TIME_DIFF_IN_SECONDS = 20
+    Args:
+        None
+    Returns:
+        str: Id of the workspace.
+    """
+    api_info = AuthClient().get_auth()
+    if api_info.workspaces is not None:
+        work_space_id = api_info.workspaces[0].id
 
-UPDATED_NAME = "NewResult"
-UPDATED_KEYWORD = ["NewKeyword"]
-UPDATED_PROPERTIES = {"NewKey": "NewValue"}
-UPDATED_STATUS_NAME = "Done"
-STARTS_WITH = "_T"
+    return work_space_id
 
 
 @pytest.fixture(scope="class")
@@ -76,12 +68,14 @@ def create_result_request(get_result_uuid: Callable):
         result_uuid = get_result_uuid()
 
         request_body = TestResultRequestObject(
-            part_number=f"{PART_NUMBER_PREFIX}_{result_uuid}",
-            program_name=PROGRAM_NAME,
-            keywords=TEST_KEYWORD,
-            properties=PROPERTY,
-            workspace=WORK_SPACE_ID,
-            status=StatusObject(statusType=StatusType.PASSED, statusName=STATUS_NAME),
+            part_number=f"{CreateResultRequest.PART_NUMBER_PREFIX}_{result_uuid}",
+            program_name=CreateResultRequest.PROGRAM_NAME,
+            keywords=CreateResultRequest.TEST_KEYWORD,
+            properties=CreateResultRequest.PROPERTY,
+            workspace=get_workspace_id(),
+            status=StatusObject(
+                statusType=StatusType.PASSED, statusName=CreateResultRequest.STATUS_NAME
+            ),
         )
         return request_body
 
@@ -125,17 +119,17 @@ def update_result_request():
 
     def _update_result_request(
         id,
-        name=UPDATED_NAME,
-        keywords=UPDATED_KEYWORD,
-        properties=UPDATED_PROPERTIES,
-        status_name=UPDATED_STATUS_NAME,
+        name=UpdateResults.UPDATED_NAME,
+        keywords=UpdateResults.UPDATED_KEYWORD,
+        properties=UpdateResults.UPDATED_PROPERTIES,
+        status_name=UpdateResults.UPDATED_STATUS_NAME,
     ):
         result_request_details = TestResultUpdateRequestObject(
             id=id,
             status=StatusObject(statusType=StatusType.PASSED, statusName=status_name),
-            # programName=name,
+            programName=name,
             keywords=keywords,
-            # properties=properties,
+            properties=properties,
         )
 
         return result_request_details
@@ -180,9 +174,9 @@ class TestSuiteTestMonitorClientResults:
         """Test a partially successful create results API."""
         valid_result = create_result_request()
         duplicate_result = TestResultRequestObject(
-            program_name=PROGRAM_NAME,
+            program_name=CreateResultRequest.PROGRAM_NAME,
             status=StatusObject(status_type=StatusType.PASSED),
-            workspace=INVALID_ID,
+            workspace=CreateResultRequest.INVALID_ID,
         )
         request_body = CreateTestResultsRequest(
             results=[valid_result, duplicate_result]
@@ -214,21 +208,21 @@ class TestSuiteTestMonitorClientResults:
 
         assert updated_at_timestamp == pytest.approx(
             current_timestamp,
-            abs=MAX_TIME_DIFF_IN_SECONDS,
+            abs=CreateResultRequest.MAX_TIME_DIFF_IN_SECONDS,
         )
 
     def test__get_result__invalid_id(self, client: TestMonitorClient):
         """Test get result API with invalid id."""
         with pytest.raises(ApiException, match="404 Not Found"):
-            client.get_result(INVALID_ID)
+            client.get_result(CreateResultRequest.INVALID_ID)
 
     def test__query_results(self, client: TestMonitorClient):
         """Test query results API"""
         result_query_body = ResultsAdvancedQuery(
-            filter=FILTER,
-            substitutions=SUBSTITUTIONS,
+            filter=QueryResults.FILTER,
+            substitutions=QueryResults.SUBSTITUTIONS,
             orderBy=ResultQueryOrderByField.PROGRAM_NAME,
-            projection=PROJECTION,
+            projection=QueryResults.PROJECTION,
             descending=False,
             returnCount=True,
         )
@@ -244,7 +238,7 @@ class TestSuiteTestMonitorClientResults:
         """Test get results API."""
         get_results_response = client.get_results(
             returnCount=True,
-            take=TAKE_COUNT,
+            take=QueryResults.TAKE_COUNT,
             continuationToken=None,
         )
 
@@ -252,7 +246,7 @@ class TestSuiteTestMonitorClientResults:
         assert get_results_response.total_count > 0
         assert get_results_response.continuation_token is not None
         assert get_results_response.results is not None
-        assert len(get_results_response.results) == TAKE_COUNT
+        assert len(get_results_response.results) == QueryResults.TAKE_COUNT
 
     def test__delete_result(
         self,
@@ -306,11 +300,12 @@ class TestSuiteTestMonitorClientResults:
         response = client.update_results(request_body)
         updated_result = response.results[0]
 
-        assert updated_result.program_name == UPDATED_NAME
-        assert updated_result.properties == UPDATED_PROPERTIES
-        assert updated_result.keywords == UPDATED_KEYWORD
+        assert updated_result.program_name == UpdateResults.UPDATED_NAME
+        assert updated_result.properties == UpdateResults.UPDATED_PROPERTIES
+        assert updated_result.keywords == UpdateResults.UPDATED_KEYWORD
+
         assert updated_result.status is not None
-        assert updated_result.status.status_name == UPDATED_STATUS_NAME
+        assert updated_result.status.status_name == UpdateResults.UPDATED_STATUS_NAME
 
     def test_update_result_without_replacement(
         self,
@@ -319,15 +314,15 @@ class TestSuiteTestMonitorClientResults:
         update_result_request: Callable,
     ):
         """Test update result API without replace key."""
-        existing_result = client.get_result(create_test_results[1].id)
-        print(existing_result)
-        new_result_info = update_result_request(id=create_test_results[1].id)
-        request_body = UpdateTestResultsRequest(results=[new_result_info])
+        existing_result = client.get_result(create_test_results[2].id)
+        new_result_info = update_result_request(id=create_test_results[2].id)
+        request_body = UpdateTestResultsRequest(
+            results=[new_result_info], replace=False, determineStatusFromSteps=False
+        )
         response = client.update_results(request_body)
         updated_result = response.results[0]
-        # print(updated_result)
 
-        assert updated_result.program_name == existing_result.program_name
+        assert updated_result.program_name == UpdateResults.UPDATED_NAME
         assert (
             updated_result.keywords is not None and existing_result.keywords is not None
         )
@@ -346,7 +341,7 @@ class TestSuiteTestMonitorClientResults:
     ):
         """Test partially successful update results API."""
         valid_result_info = update_result_request(id=create_test_results[3].id)
-        invalid_result_info = update_result_request(id=INVALID_ID)
+        invalid_result_info = update_result_request(id=CreateResultRequest.INVALID_ID)
 
         # Update multiple results with one of the results being invalid and check the response.
         request_body = UpdateTestResultsRequest(
@@ -364,9 +359,9 @@ class TestSuiteTestMonitorClientResults:
         """Test query result values API."""
         request_body = ResultValuesQuery(
             field=ResultValuesQueryField.PROGRAM_NAME,
-            filter=FILTER,
-            substitutions=SUBSTITUTIONS,
-            startsWith=STARTS_WITH,
+            filter=QueryResults.FILTER,
+            substitutions=QueryResults.SUBSTITUTIONS,
+            startsWith=QueryResults.STARTS_WITH,
         )
 
         response = client.query_result_values(request_body)

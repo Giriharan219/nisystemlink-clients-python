@@ -106,7 +106,7 @@ class TestMonitorClient(BaseClient):
 
         Args:
             resultId : Result ID to be deleted.
-            deleteSteps : Delete the steps along with results.
+            deleteSteps : Delete the steps associated with results.
 
         Returns:
             None

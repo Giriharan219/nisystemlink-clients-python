@@ -704,7 +704,7 @@ class UpdateTestResultsRequest(JsonModel):
     """
     Array of test results to update
     """
-    replace: Optional[bool] = Field(False, alias="replace")
+    replace: Optional[bool] = Field(False, example=False)
     """
     Replace the existing fields instead of merging them
     """
