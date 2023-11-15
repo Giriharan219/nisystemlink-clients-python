@@ -7,7 +7,7 @@ from ._create_and_update_results import (
     ResultUpdatePartialSuccessResponse,
 )
 from ._delete_results import DeleteResultsRequest
-from ._query_results import ResultsQueryResponse,QueryResultValuesResponse
+from ._query_results import ResultsQueryResponse, QueryResultValuesResponse
 from ._testmonitor_models import (
     V2Operations,
     ResultsAdvancedQuery,

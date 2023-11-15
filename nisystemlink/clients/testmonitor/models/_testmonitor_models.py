@@ -8,7 +8,7 @@ from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
 from nisystemlink.clients.core._uplink._json_model import JsonModel
-from pydantic import Field, conint
+from pydantic import Field
 
 
 class Error(JsonModel):
@@ -20,11 +20,11 @@ class Error(JsonModel):
     """
     Numeric error code
     """
-    resource_type: Optional[str] = Field(None, alias='resourceType')
+    resource_type: Optional[str] = Field(None, alias="resourceType")
     """
     Type of resource associated with the error
     """
-    resource_id: Optional[str] = Field(None, alias='resourceId')
+    resource_id: Optional[str] = Field(None, alias="resourceId")
     """
     Identifier of the resource associated with the error
     """
@@ -36,7 +36,7 @@ class Error(JsonModel):
     """
     Positional argument values for the error code
     """
-    inner_errors: Optional[List[Error]] = Field(None, alias='innerErrors')
+    inner_errors: Optional[List[Error]] = Field(None, alias="innerErrors")
 
 
 class Operation(JsonModel):
@@ -51,18 +51,18 @@ class Operation(JsonModel):
 
 
 class Operations(JsonModel):
-    get_results: Optional[Operation] = Field(None, alias='getResults')
-    query_results: Optional[Operation] = Field(None, alias='queryResults')
-    create_results: Optional[Operation] = Field(None, alias='createResults')
-    update_results: Optional[Operation] = Field(None, alias='updateResults')
-    delete_result: Optional[Operation] = Field(None, alias='deleteResult')
-    delete_many_results: Optional[Operation] = Field(None, alias='deleteManyResults')
-    get_steps: Optional[Operation] = Field(None, alias='getSteps')
-    query_steps: Optional[Operation] = Field(None, alias='querySteps')
-    create_steps: Optional[Operation] = Field(None, alias='createSteps')
-    update_steps: Optional[Operation] = Field(None, alias='updateSteps')
-    delete_step: Optional[Operation] = Field(None, alias='deleteStep')
-    delete_many_steps: Optional[Operation] = Field(None, alias='deleteManySteps')
+    get_results: Optional[Operation] = Field(None, alias="getResults")
+    query_results: Optional[Operation] = Field(None, alias="queryResults")
+    create_results: Optional[Operation] = Field(None, alias="createResults")
+    update_results: Optional[Operation] = Field(None, alias="updateResults")
+    delete_result: Optional[Operation] = Field(None, alias="deleteResult")
+    delete_many_results: Optional[Operation] = Field(None, alias="deleteManyResults")
+    get_steps: Optional[Operation] = Field(None, alias="getSteps")
+    query_steps: Optional[Operation] = Field(None, alias="querySteps")
+    create_steps: Optional[Operation] = Field(None, alias="createSteps")
+    update_steps: Optional[Operation] = Field(None, alias="updateSteps")
+    delete_step: Optional[Operation] = Field(None, alias="deleteStep")
+    delete_many_steps: Optional[Operation] = Field(None, alias="deleteManySteps")
 
 
 class V1Operations(JsonModel):
@@ -73,26 +73,28 @@ class V1Operations(JsonModel):
 
 
 class Operations1(JsonModel):
-    get_results: Optional[Operation] = Field(None, alias='getResults')
-    get_results_property_keys: Optional[Operation] = Field(None, alias="getResultsPropertyKeys")
-    query_results: Optional[Operation] = Field(None, alias='queryResults')
-    create_results: Optional[Operation] = Field(None, alias='createResults')
-    update_results: Optional[Operation] = Field(None, alias='updateResults')
-    delete_result: Optional[Operation] = Field(None, alias='deleteResult')
-    delete_many_results: Optional[Operation] = Field(None, alias='deleteManyResults')
-    get_steps: Optional[Operation] = Field(None, alias='getSteps')
-    query_steps: Optional[Operation] = Field(None, alias='querySteps')
-    create_steps: Optional[Operation] = Field(None, alias='createSteps')
-    update_steps: Optional[Operation] = Field(None, alias='updateSteps')
-    delete_step: Optional[Operation] = Field(None, alias='deleteStep')
-    delete_many_steps: Optional[Operation] = Field(None, alias='deleteManySteps')
-    get_products: Optional[Operation] = Field(None, alias='getProducts')
-    query_products: Optional[Operation] = Field(None, alias='queryProducts')
-    create_products: Optional[Operation] = Field(None, alias='createProducts')
-    update_products: Optional[Operation] = Field(None, alias='updateProducts')
-    delete_products: Optional[Operation] = Field(None, alias='deleteProducts')
-    delete_many_products: Optional[Operation] = Field(None, alias='deleteManyProducts')
-    query_paths: Optional[Operation] = Field(None, alias='queryPaths')
+    get_results: Optional[Operation] = Field(None, alias="getResults")
+    get_results_property_keys: Optional[Operation] = Field(
+        None, alias="getResultsPropertyKeys"
+    )
+    query_results: Optional[Operation] = Field(None, alias="queryResults")
+    create_results: Optional[Operation] = Field(None, alias="createResults")
+    update_results: Optional[Operation] = Field(None, alias="updateResults")
+    delete_result: Optional[Operation] = Field(None, alias="deleteResult")
+    delete_many_results: Optional[Operation] = Field(None, alias="deleteManyResults")
+    get_steps: Optional[Operation] = Field(None, alias="getSteps")
+    query_steps: Optional[Operation] = Field(None, alias="querySteps")
+    create_steps: Optional[Operation] = Field(None, alias="createSteps")
+    update_steps: Optional[Operation] = Field(None, alias="updateSteps")
+    delete_step: Optional[Operation] = Field(None, alias="deleteStep")
+    delete_many_steps: Optional[Operation] = Field(None, alias="deleteManySteps")
+    get_products: Optional[Operation] = Field(None, alias="getProducts")
+    query_products: Optional[Operation] = Field(None, alias="queryProducts")
+    create_products: Optional[Operation] = Field(None, alias="createProducts")
+    update_products: Optional[Operation] = Field(None, alias="updateProducts")
+    delete_products: Optional[Operation] = Field(None, alias="deleteProducts")
+    delete_many_products: Optional[Operation] = Field(None, alias="deleteManyProducts")
+    query_paths: Optional[Operation] = Field(None, alias="queryPaths")
 
 
 class V2Operations(JsonModel):
@@ -103,32 +105,32 @@ class V2Operations(JsonModel):
 
 
 class StatusType(Enum):
-    LOOPING = 'LOOPING'
-    SKIPPED = 'SKIPPED'
-    CUSTOM = 'CUSTOM'
-    DONE = 'DONE'
-    PASSED = 'PASSED'
-    FAILED = 'FAILED'
-    RUNNING = 'RUNNING'
-    WAITING = 'WAITING'
-    TERMINATED = 'TERMINATED'
-    ERRORED = 'ERRORED'
-    TIMED_OUT = 'TIMED_OUT'
+    LOOPING = "LOOPING"
+    SKIPPED = "SKIPPED"
+    CUSTOM = "CUSTOM"
+    DONE = "DONE"
+    PASSED = "PASSED"
+    FAILED = "FAILED"
+    RUNNING = "RUNNING"
+    WAITING = "WAITING"
+    TERMINATED = "TERMINATED"
+    ERRORED = "ERRORED"
+    TIMED_OUT = "TIMED_OUT"
 
 
 class StatusObject(JsonModel):
-    status_type: StatusType = Field(..., alias='statusType', example='PASSED')
+    status_type: StatusType = Field(..., alias="statusType", example="PASSED")
     """
     Status type enum
     """
-    status_name: Optional[str] = Field(None, alias='statusName', example='Passed')
+    status_name: Optional[str] = Field(None, alias="statusName", example="Passed")
     """
     Status name
     """
 
 
 class NamedValueObject(JsonModel):
-    name: str = Field(..., example='Voltage')
+    name: str = Field(..., example="Voltage")
     """
     The name of the value
     """
@@ -139,257 +141,257 @@ class NamedValueObject(JsonModel):
 
 
 class OrderByComparisonType(Enum):
-    DEFAULT = 'DEFAULT'
-    LEXICOGRAPHIC = 'LEXICOGRAPHIC'
-    NUMERIC = 'NUMERIC'
+    DEFAULT = "DEFAULT"
+    LEXICOGRAPHIC = "LEXICOGRAPHIC"
+    NUMERIC = "NUMERIC"
 
 
 class ProductValuesQueryField(Enum):
-    ID = 'ID'
-    PART_NUMBER = 'PART_NUMBER'
-    NAME = 'NAME'
-    FAMILY = 'FAMILY'
-    UPDATED_AT = 'UPDATED_AT'
+    ID = "ID"
+    PART_NUMBER = "PART_NUMBER"
+    NAME = "NAME"
+    FAMILY = "FAMILY"
+    UPDATED_AT = "UPDATED_AT"
 
 
 class ProductQueryOrderByField(Enum):
-    ID = 'ID'
-    PART_NUMBER = 'PART_NUMBER'
-    NAME = 'NAME'
-    FAMILY = 'FAMILY'
-    UPDATED_AT = 'UPDATED_AT'
+    ID = "ID"
+    PART_NUMBER = "PART_NUMBER"
+    NAME = "NAME"
+    FAMILY = "FAMILY"
+    UPDATED_AT = "UPDATED_AT"
 
 
 class ProductField(Enum):
-    ID = 'ID'
-    PART_NUMBER = 'PART_NUMBER'
-    NAME = 'NAME'
-    FAMILY = 'FAMILY'
-    UPDATED_AT = 'UPDATED_AT'
-    KEYWORDS = 'KEYWORDS'
-    PROPERTIES = 'PROPERTIES'
-    FILE_IDS = 'FILE_IDS'
+    ID = "ID"
+    PART_NUMBER = "PART_NUMBER"
+    NAME = "NAME"
+    FAMILY = "FAMILY"
+    UPDATED_AT = "UPDATED_AT"
+    KEYWORDS = "KEYWORDS"
+    PROPERTIES = "PROPERTIES"
+    FILE_IDS = "FILE_IDS"
 
 
 class ResultValuesQueryField(Enum):
-    ID = 'ID'
-    STARTED_AT = 'STARTED_AT'
-    UPDATED_AT = 'UPDATED_AT'
-    PROGRAM_NAME = 'PROGRAM_NAME'
-    SYSTEM_ID = 'SYSTEM_ID'
-    HOST_NAME = 'HOST_NAME'
-    OPERATOR = 'OPERATOR'
-    SERIAL_NUMBER = 'SERIAL_NUMBER'
-    PART_NUMBER = 'PART_NUMBER'
-    TOTAL_TIME_IN_SECONDS = 'TOTAL_TIME_IN_SECONDS'
+    ID = "ID"
+    STARTED_AT = "STARTED_AT"
+    UPDATED_AT = "UPDATED_AT"
+    PROGRAM_NAME = "PROGRAM_NAME"
+    SYSTEM_ID = "SYSTEM_ID"
+    HOST_NAME = "HOST_NAME"
+    OPERATOR = "OPERATOR"
+    SERIAL_NUMBER = "SERIAL_NUMBER"
+    PART_NUMBER = "PART_NUMBER"
+    TOTAL_TIME_IN_SECONDS = "TOTAL_TIME_IN_SECONDS"
 
 
 class ResultQueryOrderByField(Enum):
-    ID = 'ID'
-    STARTED_AT = 'STARTED_AT'
-    UPDATED_AT = 'UPDATED_AT'
-    PROGRAM_NAME = 'PROGRAM_NAME'
-    SYSTEM_ID = 'SYSTEM_ID'
-    HOST_NAME = 'HOST_NAME'
-    OPERATOR = 'OPERATOR'
-    SERIAL_NUMBER = 'SERIAL_NUMBER'
-    PART_NUMBER = 'PART_NUMBER'
-    PROPERTIES = 'PROPERTIES'
-    TOTAL_TIME_IN_SECONDS = 'TOTAL_TIME_IN_SECONDS'
+    ID = "ID"
+    STARTED_AT = "STARTED_AT"
+    UPDATED_AT = "UPDATED_AT"
+    PROGRAM_NAME = "PROGRAM_NAME"
+    SYSTEM_ID = "SYSTEM_ID"
+    HOST_NAME = "HOST_NAME"
+    OPERATOR = "OPERATOR"
+    SERIAL_NUMBER = "SERIAL_NUMBER"
+    PART_NUMBER = "PART_NUMBER"
+    PROPERTIES = "PROPERTIES"
+    TOTAL_TIME_IN_SECONDS = "TOTAL_TIME_IN_SECONDS"
 
 
 class ResultField(Enum):
-    ID = 'ID'
-    STATUS = 'STATUS'
-    STARTED_AT = 'STARTED_AT'
-    UPDATED_AT = 'UPDATED_AT'
-    PROGRAM_NAME = 'PROGRAM_NAME'
-    SYSTEM_ID = 'SYSTEM_ID'
-    HOST_NAME = 'HOST_NAME'
-    OPERATOR = 'OPERATOR'
-    SERIAL_NUMBER = 'SERIAL_NUMBER'
-    PART_NUMBER = 'PART_NUMBER'
-    TOTAL_TIME_IN_SECONDS = 'TOTAL_TIME_IN_SECONDS'
-    KEYWORDS = 'KEYWORDS'
-    PROPERTIES = 'PROPERTIES'
-    FILE_IDS = 'FILE_IDS'
-    DATA_TABLE_IDS = 'DATA_TABLE_IDS'
-    STATUS_TYPE_SUMMARY = 'STATUS_TYPE_SUMMARY'
-    WORKSPACE = 'WORKSPACE'
+    ID = "ID"
+    STATUS = "STATUS"
+    STARTED_AT = "STARTED_AT"
+    UPDATED_AT = "UPDATED_AT"
+    PROGRAM_NAME = "PROGRAM_NAME"
+    SYSTEM_ID = "SYSTEM_ID"
+    HOST_NAME = "HOST_NAME"
+    OPERATOR = "OPERATOR"
+    SERIAL_NUMBER = "SERIAL_NUMBER"
+    PART_NUMBER = "PART_NUMBER"
+    TOTAL_TIME_IN_SECONDS = "TOTAL_TIME_IN_SECONDS"
+    KEYWORDS = "KEYWORDS"
+    PROPERTIES = "PROPERTIES"
+    FILE_IDS = "FILE_IDS"
+    DATA_TABLE_IDS = "DATA_TABLE_IDS"
+    STATUS_TYPE_SUMMARY = "STATUS_TYPE_SUMMARY"
+    WORKSPACE = "WORKSPACE"
 
 
 class StepValuesQueryField(Enum):
-    NAME = 'NAME'
-    STEP_TYPE = 'STEP_TYPE'
-    STEP_ID = 'STEP_ID'
-    PARENT_ID = 'PARENT_ID'
-    RESULT_ID = 'RESULT_ID'
-    PATH = 'PATH'
-    TOTAL_TIME_IN_SECONDS = 'TOTAL_TIME_IN_SECONDS'
-    STARTED_AT = 'STARTED_AT'
-    UPDATED_AT = 'UPDATED_AT'
-    DATA_MODEL = 'DATA_MODEL'
+    NAME = "NAME"
+    STEP_TYPE = "STEP_TYPE"
+    STEP_ID = "STEP_ID"
+    PARENT_ID = "PARENT_ID"
+    RESULT_ID = "RESULT_ID"
+    PATH = "PATH"
+    TOTAL_TIME_IN_SECONDS = "TOTAL_TIME_IN_SECONDS"
+    STARTED_AT = "STARTED_AT"
+    UPDATED_AT = "UPDATED_AT"
+    DATA_MODEL = "DATA_MODEL"
 
 
 class StepQueryOrderByField(Enum):
-    NAME = 'NAME'
-    STEP_TYPE = 'STEP_TYPE'
-    STEP_ID = 'STEP_ID'
-    PARENT_ID = 'PARENT_ID'
-    RESULT_ID = 'RESULT_ID'
-    PATH = 'PATH'
-    TOTAL_TIME_IN_SECONDS = 'TOTAL_TIME_IN_SECONDS'
-    STARTED_AT = 'STARTED_AT'
-    UPDATED_AT = 'UPDATED_AT'
-    DATA_MODEL = 'DATA_MODEL'
+    NAME = "NAME"
+    STEP_TYPE = "STEP_TYPE"
+    STEP_ID = "STEP_ID"
+    PARENT_ID = "PARENT_ID"
+    RESULT_ID = "RESULT_ID"
+    PATH = "PATH"
+    TOTAL_TIME_IN_SECONDS = "TOTAL_TIME_IN_SECONDS"
+    STARTED_AT = "STARTED_AT"
+    UPDATED_AT = "UPDATED_AT"
+    DATA_MODEL = "DATA_MODEL"
 
 
 class StepField(Enum):
-    NAME = 'NAME'
-    STEP_TYPE = 'STEP_TYPE'
-    STEP_ID = 'STEP_ID'
-    PARENT_ID = 'PARENT_ID'
-    RESULT_ID = 'RESULT_ID'
-    PATH = 'PATH'
-    PATH_IDS = 'PATH_IDS'
-    STATUS = 'STATUS'
-    TOTAL_TIME_IN_SECONDS = 'TOTAL_TIME_IN_SECONDS'
-    STARTED_AT = 'STARTED_AT'
-    UPDATED_AT = 'UPDATED_AT'
-    INPUTS = 'INPUTS'
-    OUTPUTS = 'OUTPUTS'
-    DATA_MODEL = 'DATA_MODEL'
-    DATA = 'DATA'
-    HAS_CHILDREN = 'HAS_CHILDREN'
-    WORKSPACE = 'WORKSPACE'
+    NAME = "NAME"
+    STEP_TYPE = "STEP_TYPE"
+    STEP_ID = "STEP_ID"
+    PARENT_ID = "PARENT_ID"
+    RESULT_ID = "RESULT_ID"
+    PATH = "PATH"
+    PATH_IDS = "PATH_IDS"
+    STATUS = "STATUS"
+    TOTAL_TIME_IN_SECONDS = "TOTAL_TIME_IN_SECONDS"
+    STARTED_AT = "STARTED_AT"
+    UPDATED_AT = "UPDATED_AT"
+    INPUTS = "INPUTS"
+    OUTPUTS = "OUTPUTS"
+    DATA_MODEL = "DATA_MODEL"
+    DATA = "DATA"
+    HAS_CHILDREN = "HAS_CHILDREN"
+    WORKSPACE = "WORKSPACE"
 
 
 class PathQueryOrderByField(Enum):
-    ID = 'ID'
-    PROGRAM_NAME = 'PROGRAM_NAME'
-    PART_NUMBER = 'PART_NUMBER'
-    PATH = 'PATH'
+    ID = "ID"
+    PROGRAM_NAME = "PROGRAM_NAME"
+    PART_NUMBER = "PART_NUMBER"
+    PATH = "PATH"
 
 
 class PathField(Enum):
-    ID = 'ID'
-    PROGRAM_NAME = 'PROGRAM_NAME'
-    PART_NUMBER = 'PART_NUMBER'
-    PATH = 'PATH'
-    PATH_NAMES = 'PATH_NAMES'
-    INPUTS = 'INPUTS'
-    OUTPUTS = 'OUTPUTS'
-    MEASUREMENTS = 'MEASUREMENTS'
+    ID = "ID"
+    PROGRAM_NAME = "PROGRAM_NAME"
+    PART_NUMBER = "PART_NUMBER"
+    PATH = "PATH"
+    PATH_NAMES = "PATH_NAMES"
+    INPUTS = "INPUTS"
+    OUTPUTS = "OUTPUTS"
+    MEASUREMENTS = "MEASUREMENTS"
 
 
 class ValueType(Enum):
-    MIXED = 'MIXED'
-    NULL = 'null'
-    BOOLEAN = 'BOOLEAN'
-    NUMBER = 'NUMBER'
-    STRING = 'STRING'
-    ARRAY = 'ARRAY'
-    OBJECT = 'OBJECT'
+    MIXED = "MIXED"
+    NULL = "null"
+    BOOLEAN = "BOOLEAN"
+    NUMBER = "NUMBER"
+    STRING = "STRING"
+    ARRAY = "ARRAY"
+    OBJECT = "OBJECT"
 
 
 class ResponseFormat(Enum):
-    JSON = 'JSON'
-    CSV = 'CSV'
+    JSON = "JSON"
+    CSV = "CSV"
 
 
 class ProductRequestObject(JsonModel):
-    part_number: Optional[str] = Field(None, alias='partNumber', example='156502A-11L')
+    part_number: Optional[str] = Field(None, alias="partNumber", example="156502A-11L")
     """
     The part number of the product
     """
-    name: Optional[str] = Field(None, example='cRIO-9030')
+    name: Optional[str] = Field(None, example="cRIO-9030")
     """
     The name of the product
     """
-    family: Optional[str] = Field(None, example='cRIO')
+    family: Optional[str] = Field(None, example="cRIO")
     """
     The family of the product
     """
-    keywords: Optional[List[str]] = Field(None, example=['keyword1', 'keyword2'])
+    keywords: Optional[List[str]] = Field(None, example=["keyword1", "keyword2"])
     """
     Words or phrases associated with the product
     """
-    properties: Optional[Dict[str, str]] = Field(None, example={'key1': 'value1'})
+    properties: Optional[Dict[str, str]] = Field(None, example={"key1": "value1"})
     """
     Key-value pairs associated with the product
     """
     file_ids: Optional[List[str]] = Field(
-        None, alias='fileIds', example=['5ccb19ce5aa0a3348872c3e3']
+        None, alias="fileIds", example=["5ccb19ce5aa0a3348872c3e3"]
     )
     """
-    Array of file IDs attached to the product. This API does not verify that the 
+    Array of file IDs attached to the product. This API does not verify that the
     file IDs included exist.
     """
 
 
 class ProductResponseObject(JsonModel):
-    id: Optional[str] = Field(None, example='02600cf8-c2bb-4ff9-a139-031e943fb0c0')
+    id: Optional[str] = Field(None, example="02600cf8-c2bb-4ff9-a139-031e943fb0c0")
     """
     ID of the product
     """
-    part_number: Optional[str] = Field(None, alias='partNumber', example='156502A-11L')
+    part_number: Optional[str] = Field(None, alias="partNumber", example="156502A-11L")
     """
     The part number of the product
     """
-    name: Optional[str] = Field(None, example='cRIO-9030')
+    name: Optional[str] = Field(None, example="cRIO-9030")
     """
     The name of the product
     """
-    family: Optional[str] = Field(None, example='cRIO')
+    family: Optional[str] = Field(None, example="cRIO")
     """
     The family of the product
     """
     updated_at: Optional[datetime] = Field(
-        None, alias='updatedAt', example='2018-05-09T15:07:42.527921Z'
+        None, alias="updatedAt", example="2018-05-09T15:07:42.527921Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the product was last updated.
     """
-    keywords: Optional[List[str]] = Field(None, example=['keyword1', 'keyword2'])
+    keywords: Optional[List[str]] = Field(None, example=["keyword1", "keyword2"])
     """
     Words or phrases associated with the product
     """
-    properties: Optional[Dict[str, str]] = Field(None, example={'key1': 'value1'})
+    properties: Optional[Dict[str, str]] = Field(None, example={"key1": "value1"})
     """
     Key-value pairs associated with the product
     """
     file_ids: Optional[List[str]] = Field(
-        None, alias='fileIds', example=['5e30934193cac8046851acb2']
+        None, alias="fileIds", example=["5e30934193cac8046851acb2"]
     )
     """
-    Array of file IDs attached to the product. This API does not verify that the 
+    Array of file IDs attached to the product. This API does not verify that the
     file IDs included exist.
     """
 
 
 class ProductUpdateRequestObject(JsonModel):
-    id: Optional[str] = Field(None, example='02600cf8-c2bb-4ff9-a139-031e943fb0c0')
+    id: Optional[str] = Field(None, example="02600cf8-c2bb-4ff9-a139-031e943fb0c0")
     """
     ID of the product to update
     """
-    name: Optional[str] = Field(None, example='cRIO-9030')
+    name: Optional[str] = Field(None, example="cRIO-9030")
     """
     The name of the product
     """
-    family: Optional[str] = Field(None, example='cRIO')
+    family: Optional[str] = Field(None, example="cRIO")
     """
     The family of the product
     """
-    keywords: Optional[List[str]] = Field(None, example=['keyword1', 'keyword2'])
+    keywords: Optional[List[str]] = Field(None, example=["keyword1", "keyword2"])
     """
     Words or phrases associated with the product
     """
-    properties: Optional[Dict[str, str]] = Field(None, example={'key1': 'value1'})
+    properties: Optional[Dict[str, str]] = Field(None, example={"key1": "value1"})
     """
     Key-value pairs associated with the product
     """
     file_ids: Optional[List[str]] = Field(
-        None, alias='fileIds', example=['5e30934193cac8046851acb2']
+        None, alias="fileIds", example=["5e30934193cac8046851acb2"]
     )
     """
     Array of file IDs attached to the product. This API does not verify that the file IDs included
@@ -398,67 +400,67 @@ class ProductUpdateRequestObject(JsonModel):
 
 
 class TestResultRequestObject(JsonModel):
-    program_name: str = Field(..., alias='programName', example='My Program Name')
+    program_name: str = Field(..., alias="programName", example="My Program Name")
     """
     Program name
     """
     status: StatusObject
-    system_id: Optional[str] = Field(None, alias='systemId', example='my-system')
+    system_id: Optional[str] = Field(None, alias="systemId", example="my-system")
     """
     System id
     """
-    host_name: Optional[str] = Field(None, alias='hostName', example='My-Host')
+    host_name: Optional[str] = Field(None, alias="hostName", example="My-Host")
     """
     Host name
     """
-    properties: Optional[Dict[str, str]] = Field(None, example={'key1': 'value1'})
+    properties: Optional[Dict[str, str]] = Field(None, example={"key1": "value1"})
     """
     Test result properties
     """
-    keywords: Optional[List[str]] = Field(None, example=['keyword1', 'keyword2'])
+    keywords: Optional[List[str]] = Field(None, example=["keyword1", "keyword2"])
     """
     Words or phrases associated with the test result
     """
-    serial_number: Optional[str] = Field(None, alias='serialNumber', example='123-456')
+    serial_number: Optional[str] = Field(None, alias="serialNumber", example="123-456")
     """
     Serial number
     """
-    operator: Optional[str] = Field(None, example='admin')
+    operator: Optional[str] = Field(None, example="admin")
     """
     Operator
     """
-    part_number: Optional[str] = Field(None, alias='partNumber', example='cRIO-9030')
+    part_number: Optional[str] = Field(None, alias="partNumber", example="cRIO-9030")
     """
     The part number of the device under test.
     """
     file_ids: Optional[List[str]] = Field(
-        None, alias='fileIds', example=['5e30934193cac8046851acb2']
+        None, alias="fileIds", example=["5e30934193cac8046851acb2"]
     )
     """
-    Array of file ids attached to the test result. This API does not verify that the file IDs 
+    Array of file ids attached to the test result. This API does not verify that the file IDs
     included exist.
     """
     data_table_ids: Optional[List[str]] = Field(
-        None, alias='dataTableIds', example=['62333547f7521f2f2f4615e5']
+        None, alias="dataTableIds", example=["62333547f7521f2f2f4615e5"]
     )
     """
-    Array of data table ids attached to the test result. This API does not verify that the data 
+    Array of data table ids attached to the test result. This API does not verify that the data
     table IDs included exist.
     """
     started_at: Optional[datetime] = Field(
-        None, alias='startedAt', example='2018-05-07T18:58:05.219692Z'
+        None, alias="startedAt", example="2018-05-07T18:58:05.219692Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the test result began
     """
     total_time_in_seconds: Optional[float] = Field(
-        0.0, alias='totalTimeInSeconds', example=29.9
+        0.0, alias="totalTimeInSeconds", example=29.9
     )
     """
     Total run-time of the test in seconds
     """
     workspace: Optional[str] = Field(
-        None, example='f94b178e-288c-4101-afb1-833992413aa7'
+        None, example="f94b178e-288c-4101-afb1-833992413aa7"
     )
     """
     The workspace the test result belongs to
@@ -468,79 +470,81 @@ class TestResultRequestObject(JsonModel):
 class TestResultResponseObject(JsonModel):
     status: Optional[StatusObject] = None
     started_at: Optional[datetime] = Field(
-        None, alias='startedAt', example='2018-05-07T18:58:05.219692Z'
+        None, alias="startedAt", example="2018-05-07T18:58:05.219692Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the test result began
     """
     updated_at: Optional[datetime] = Field(
-        None, alias='updatedAt', example='2018-05-09T15:07:42.527921Z'
+        None, alias="updatedAt", example="2018-05-09T15:07:42.527921Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the result was last updated
     """
     program_name: Optional[str] = Field(
-        None, alias='programName', example='My test program'
+        None, alias="programName", example="My test program"
     )
     """
     Program name
     """
-    id: str = Field(..., example='02600cf8-c2bb-4ff9-a139-031e943fb0c0')
+    id: str = Field(..., example="02600cf8-c2bb-4ff9-a139-031e943fb0c0")
     """
     Id of the test result
     """
     system_id: Optional[str] = Field(
-        None, alias='systemId', example='5e30931993cac8046850a996'
+        None, alias="systemId", example="5e30931993cac8046850a996"
     )
     """
     Id of the system
     """
-    host_name: Optional[str] = Field(None, alias='hostName', example='My-Host')
+    host_name: Optional[str] = Field(None, alias="hostName", example="My-Host")
     """
     Host name of the system
     """
-    operator: Optional[str] = Field(None, example='admin')
+    operator: Optional[str] = Field(None, example="admin")
     """
     Name of the operator running the test
     """
-    part_number: Optional[str] = Field(None, alias='partNumber', example='cRIO-9030')
+    part_number: Optional[str] = Field(None, alias="partNumber", example="cRIO-9030")
     """
     The part number of the device under test.
     """
-    serial_number: Optional[str] = Field(None, alias='serialNumber', example='abc-123')
+    serial_number: Optional[str] = Field(None, alias="serialNumber", example="abc-123")
     """
     Sequential number of the device under test
     """
     total_time_in_seconds: Optional[float] = Field(
-        None, alias='totalTimeInSeconds', example=29.9
+        None, alias="totalTimeInSeconds", example=29.9
     )
     """
     Total run-time of the test in seconds
     """
-    keywords: Optional[List[str]] = Field(None, example=['keyword1', 'keyword2'])
+    keywords: Optional[List[str]] = Field(None, example=["keyword1", "keyword2"])
     """
     Words or phrases associated with the test result
     """
-    properties: Optional[Dict[str, str]] = Field(None, example={'key1': 'value1'})
+    properties: Optional[Dict[str, str]] = Field(None, example={"key1": "value1"})
     """
     Test result properties
     """
-    file_ids: Optional[List[str]] = Field(None, alias='fileIds', example=[])
+    file_ids: Optional[List[str]] = Field(None, alias="fileIds", example=[])
     """
-    Array of file ids attached to the test result. This API does not verify that the file IDs included exist.
+    Array of file ids attached to the test result. This API does not verify that the file IDs
+    included exist.
     """
-    data_table_ids: Optional[List[str]] = Field(None, alias='dataTableIds', example=[])
+    data_table_ids: Optional[List[str]] = Field(None, alias="dataTableIds", example=[])
     """
-    Array of data table ids attached to the test result. This API does not verify that the data table IDs included exist.
+    Array of data table ids attached to the test result. This API does not verify that the
+    data table IDs included exist.
     """
     status_type_summary: Optional[Dict[str, int]] = Field(
-        None, alias='statusTypeSummary', example={'FAILED': 5}
+        None, alias="statusTypeSummary", example={"FAILED": 5}
     )
     """
     Status type summary
     """
     workspace: Optional[str] = Field(
-        None, example='f94b178e-288c-4101-afb1-833992413aa7'
+        None, example="f94b178e-288c-4101-afb1-833992413aa7"
     )
     """
     The workspace the test result belongs to
@@ -548,71 +552,73 @@ class TestResultResponseObject(JsonModel):
 
 
 class TestResultUpdateFailureObject(JsonModel):
-    id: Optional[str] = Field(None, example='02600cf8-c2bb-4ff9-a139-031e943fb0c0')
+    id: Optional[str] = Field(None, example="02600cf8-c2bb-4ff9-a139-031e943fb0c0")
     """
     Test result id to update
     """
     program_name: Optional[str] = Field(
-        None, alias='programName', example='My Program Name'
+        None, alias="programName", example="My Program Name"
     )
     """
     Program name
     """
     status: Optional[StatusObject] = None
-    system_id: Optional[str] = Field(None, alias='systemId', example='my-system')
+    system_id: Optional[str] = Field(None, alias="systemId", example="my-system")
     """
     System id
     """
-    host_name: Optional[str] = Field(None, alias='hostName', example='My-Host')
+    host_name: Optional[str] = Field(None, alias="hostName", example="My-Host")
     """
     Host name
     """
-    properties: Optional[Dict[str, str]] = Field(None, example={'key1': 'value1'})
+    properties: Optional[Dict[str, str]] = Field(None, example={"key1": "value1"})
     """
     Test result properties
     """
-    keywords: Optional[List[str]] = Field(None, example=['keyword1', 'keyword2'])
+    keywords: Optional[List[str]] = Field(None, example=["keyword1", "keyword2"])
     """
     Words or phrases associated with the test result
     """
-    serial_number: Optional[str] = Field(None, alias='serialNumber', example='123-456')
+    serial_number: Optional[str] = Field(None, alias="serialNumber", example="123-456")
     """
     Serial number
     """
-    operator: Optional[str] = Field(None, example='admin')
+    operator: Optional[str] = Field(None, example="admin")
     """
     Operator
     """
-    part_number: Optional[str] = Field(None, alias='partNumber', example='cRIO-9030')
+    part_number: Optional[str] = Field(None, alias="partNumber", example="cRIO-9030")
     """
     The part number of the device under test.
     """
     file_ids: Optional[List[str]] = Field(
-        None, alias='fileIds', example=['5e30934193cac8046851acb2']
+        None, alias="fileIds", example=["5e30934193cac8046851acb2"]
     )
     """
-    Array of file ids attached to the test result. This API does not verify that the file IDs included exist.
+    Array of file ids attached to the test result. This API does not verify that the file IDs
+    included exist.
     """
     data_table_ids: Optional[List[str]] = Field(
-        None, alias='dataTableIds', example=['62333547f7521f2f2f4615e5']
+        None, alias="dataTableIds", example=["62333547f7521f2f2f4615e5"]
     )
     """
-    Array of data table ids attached to the test result. This API does not verify that the data table IDs included exist.
+    Array of data table ids attached to the test result. This API does not verify that the
+    data table IDs included exist.
     """
     started_at: Optional[datetime] = Field(
-        None, alias='startedAt', example='2018-05-07T18:58:05.219692Z'
+        None, alias="startedAt", example="2018-05-07T18:58:05.219692Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the test result began
     """
     total_time_in_seconds: Optional[float] = Field(
-        0.0, alias='totalTimeInSeconds', example=29.9
+        0.0, alias="totalTimeInSeconds", example=29.9
     )
     """
     Total run-time of the test in seconds
     """
     workspace: Optional[str] = Field(
-        None, example='f94b178e-288c-4101-afb1-833992413aa7'
+        None, example="f94b178e-288c-4101-afb1-833992413aa7"
     )
     """
     The workspace the test result belongs to
@@ -620,71 +626,73 @@ class TestResultUpdateFailureObject(JsonModel):
 
 
 class TestResultUpdateRequestObject(JsonModel):
-    id: str = Field(..., example='02600cf8-c2bb-4ff9-a139-031e943fb0c0')
+    id: str = Field(..., example="02600cf8-c2bb-4ff9-a139-031e943fb0c0")
     """
     Test result id to update
     """
     program_name: Optional[str] = Field(
-        None, alias='programName', example='My Program Name'
+        None, alias="programName", example="My Program Name"
     )
     """
     Program name
     """
     status: Optional[StatusObject] = None
-    system_id: Optional[str] = Field(None, alias='systemId', example='my-system')
+    system_id: Optional[str] = Field(None, alias="systemId", example="my-system")
     """
     System id
     """
-    host_name: Optional[str] = Field(None, alias='hostName', example='My-Host')
+    host_name: Optional[str] = Field(None, alias="hostName", example="My-Host")
     """
     Host name
     """
-    properties: Optional[Dict[str, str]] = Field(None, example={'key1': 'value1'})
+    properties: Optional[Dict[str, str]] = Field(None, example={"key1": "value1"})
     """
     Test result properties
     """
-    keywords: Optional[List[str]] = Field(None, example=['keyword1', 'keyword2'])
+    keywords: Optional[List[str]] = Field(None, example=["keyword1", "keyword2"])
     """
     Words or phrases associated with the test result
     """
-    serial_number: Optional[str] = Field(None, alias='serialNumber', example='123-456')
+    serial_number: Optional[str] = Field(None, alias="serialNumber", example="123-456")
     """
     Serial number
     """
-    operator: Optional[str] = Field(None, example='admin')
+    operator: Optional[str] = Field(None, example="admin")
     """
     Operator
     """
-    part_number: Optional[str] = Field(None, alias='partNumber', example='cRIO-9030')
+    part_number: Optional[str] = Field(None, alias="partNumber", example="cRIO-9030")
     """
     The part number of the device under test.
     """
     file_ids: Optional[List[str]] = Field(
-        None, alias='fileIds', example=['5e30934193cac8046851acb2']
+        None, alias="fileIds", example=["5e30934193cac8046851acb2"]
     )
     """
-    Array of file ids attached to the test result. This API does not verify that the file IDs included exist.
+    Array of file ids attached to the test result. This API does not verify that the file IDs
+    included exist.
     """
     data_table_ids: Optional[List[str]] = Field(
-        None, alias='dataTableIds', example=['62333547f7521f2f2f4615e5']
+        None, alias="dataTableIds", example=["62333547f7521f2f2f4615e5"]
     )
     """
-    Array of data table ids attached to the test result. This API does not verify that the data table IDs included exist.
+    Array of data table ids attached to the test result. This API does not verify that the
+    data table IDs included exist.
     """
     started_at: Optional[datetime] = Field(
-        None, alias='startedAt', example='2018-05-07T18:58:05.219692Z'
+        None, alias="startedAt", example="2018-05-07T18:58:05.219692Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the test result began
     """
     total_time_in_seconds: Optional[float] = Field(
-        0.0, alias='totalTimeInSeconds', example=29.9
+        0.0, alias="totalTimeInSeconds", example=29.9
     )
     """
     Total run-time of the test in seconds
     """
     workspace: Optional[str] = Field(
-        None, example='f94b178e-288c-4101-afb1-833992413aa7'
+        None, example="f94b178e-288c-4101-afb1-833992413aa7"
     )
     """
     The workspace the test result belongs to
@@ -696,12 +704,12 @@ class UpdateTestResultsRequest(JsonModel):
     """
     Array of test results to update
     """
-    replace: Optional[bool]
+    replace: Optional[bool] = Field(False, alias="replace")
     """
     Replace the existing fields instead of merging them
     """
     determine_status_from_steps: Optional[bool] = Field(
-        False, alias='determineStatusFromSteps'
+        False, alias="determineStatusFromSteps"
     )
     """
     Determine test result status from the test step statuses
@@ -721,26 +729,26 @@ class ValueSummaryObject(JsonModel):
 
 
 class PathResponseObject(JsonModel):
-    id: Optional[str] = Field(None, example='02600cf8-c2bb-4ff9-a139-031e943fb0c0')
+    id: Optional[str] = Field(None, example="02600cf8-c2bb-4ff9-a139-031e943fb0c0")
     """
     The unique ID of this path. Note that this value may change if the collection is repaired.
     """
-    path: Optional[str] = Field(None, example='MainSequence Callback\nMy Step Name')
+    path: Optional[str] = Field(None, example="MainSequence Callback\nMy Step Name")
     """
     Identifies the steps that this path is representative of.
     """
     program_name: Optional[str] = Field(
-        None, alias='programName', example='MyProgram.seq'
+        None, alias="programName", example="MyProgram.seq"
     )
     """
     The program name for which this path is defined.
     """
-    part_number: Optional[str] = Field(None, alias='partNumber', example='156502A-11L')
+    part_number: Optional[str] = Field(None, alias="partNumber", example="156502A-11L")
     """
     The part number for which this path is defined.
     """
     path_names: Optional[List[str]] = Field(
-        None, alias='pathNames', example=['MainSequence Callback', 'VoltageTest']
+        None, alias="pathNames", example=["MainSequence Callback", "VoltageTest"]
     )
     """
     The list of all ancestor step names for any step which corresponds to this path.
@@ -754,7 +762,7 @@ class PathResponseObject(JsonModel):
     The set of outputs that steps which correspond to this path may log.
     """
     measurements: Optional[Dict[str, Dict[str, Any]]] = Field(
-        None, example={'myMeasurement': {}}
+        None, example={"myMeasurement": {}}
     )
     """
     The set of measurements that steps which correspond to this path may take.
@@ -768,32 +776,41 @@ class ProductsAdvancedQuery(JsonModel):
     """
     The query filter in Dynamic Linq
     """
-    substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=['cRIO'])
+    substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=["cRIO"])
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression are
+    indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in
+    the given expression will be replaced by the element at the corresponding index (zero-based) in
+    this list. For example, "@0" in the filter expression will be replaced with the element at the
+    zeroth index of the substitutions list.
     """
-    order_by: Optional[ProductQueryOrderByField] = Field(None, alias='orderBy')
+    order_by: Optional[ProductQueryOrderByField] = Field(None, alias="orderBy")
     descending: Optional[bool] = Field(False, example=False)
     """
     -> Whether to return the products in descending order.
     """
     projection: Optional[List[ProductField]] = None
     """
-    Specifies the product fields to project. When a field value is given here, the corresponding field will be present in all returned products, and all unspecified fields will be excluded. If no projection is specified, all product fields will be returned.
+    Specifies the product fields to project. When a field value is given here, the corresponding
+    field will be present in all returned products, and all unspecified fields will be excluded.
+    If no projection is specified, all product fields will be returned.
     """
     take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of products to return.
     """
     continuation_token: Optional[str] = Field(
-        None, alias='continuationToken', example='token'
+        None, alias="continuationToken", example="token"
     )
     """
-    A token which allows the user to resume a query at the next item in the matching product set. When querying for products, a token will be returned if a query may be continued. To obtain the next page of products, pass the token to the service on a subsequent request.
+    A token which allows the user to resume a query at the next item in the matching product set.
+    When querying for products, a token will be returned if a query may be continued.
+    To obtain the next page of products, pass the token to the service on a subsequent request.
     """
-    return_count: Optional[bool] = Field(False, alias='returnCount', example=False)
+    return_count: Optional[bool] = Field(False, alias="returnCount", example=False)
     """
-    Whether to return the total number of products which match the provided filter, disregarding the take value.
+    Whether to return the total number of products which match the provided filter, disregarding
+    the take value.
     """
 
 
@@ -806,30 +823,39 @@ class PathsAdvancedQuery(JsonModel):
     """
     substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=[2.5])
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression
+    are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution
+    in the given expression will be replaced by the element at the corresponding index (zero-based)
+    in this list. For example, "@0" in the filter expression will be replaced with the element at
+    the zeroth index of the substitutions list.
     """
-    order_by: Optional[PathQueryOrderByField] = Field(None, alias='orderBy')
+    order_by: Optional[PathQueryOrderByField] = Field(None, alias="orderBy")
     descending: Optional[bool] = Field(False, example=False)
     """
     -> Whether to return the paths in descending order.
     """
     projection: Optional[List[PathField]] = None
     """
-    Specifies the path fields to project. When a field value is given here, the corresponding field will be present in all returned paths, and all unspecified fields will be excluded. If no projection is specified, all path fields will be returned.
+    Specifies the path fields to project. When a field value is given here, the corresponding
+    field will be present in all returned paths, and all unspecified fields will be excluded. If no
+    projection is specified, all path fields will be returned.
     """
     take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of paths to return.
     """
     continuation_token: Optional[str] = Field(
-        None, alias='continuationToken', example='token'
+        None, alias="continuationToken", example="token"
     )
     """
-    A token which allows the user to resume a query at the next item in the matching path set. When querying for paths, a token will be returned if a query may be continued. To obtain the next page of paths, pass the token to the service on a subsequent request.
+    A token which allows the user to resume a query at the next item in the matching path set. When
+    querying for paths, a token will be returned if a query may be continued. To obtain the next
+    page of paths, pass the token to the service on a subsequent request.
     """
-    return_count: Optional[bool] = Field(False, alias='returnCount', example=False)
+    return_count: Optional[bool] = Field(False, alias="returnCount", example=False)
     """
-    Whether to return the total number of paths which match the provided filter, disregarding the take value.
+    Whether to return the total number of paths which match the provided filter, disregarding
+    the take value.
     """
 
 
@@ -843,10 +869,14 @@ class ResultsAdvancedQuery(JsonModel):
     """
     substitutions: Optional[List[Union[int, str]]] = Field(None, example=[2.5])
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression are
+    indicated by non-negative integers that are prefixed with the "at" symbol.
+    Each substitution in the given expression will be replaced by the element at the corresponding
+    index (zero-based) in this list. For example, "@0" in the filter expression will be replaced
+    with the element at the zeroth index of the substitutions list.
     """
     product_filter: Optional[str] = Field(
-        None, alias='productFilter', example='(name != "cRIO-9030") && (family == @0)'
+        None, alias="productFilter", example='(name != "cRIO-9030") && (family == @0)'
     )
     """
     The product query filter in Dynamic Linq
@@ -855,39 +885,49 @@ class ResultsAdvancedQuery(JsonModel):
         None, alias="productSubstitutions", example=["cRIO"]
     )
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression
+    are indicated by non-negative integers that are prefixed with the "at" symbol.
+    Each substitution in the given expression will be replaced by the element at the
+    corresponding index (zero-based) in this list. For example, "@0" in the filter expression
+    will be replaced with the element at the zeroth index of the substitutions list.
     """
-    order_by: Optional[ResultQueryOrderByField] = Field(None, alias='orderBy')
+    order_by: Optional[ResultQueryOrderByField] = Field(None, alias="orderBy")
     descending: Optional[bool] = Field(False, example=False)
     """
     Whether to return the results in descending order.
     """
-    order_by_key: Optional[str] = Field(None, alias='orderByKey')
+    order_by_key: Optional[str] = Field(None, alias="orderByKey")
     """
-    The property name to order by when ordering by PROPERTIES. Results that do not contain the orderByKey will be considered the smallest value.
+    The property name to order by when ordering by PROPERTIES. Results that do not contain the
+    orderByKey will be considered the smallest value.
     """
     order_by_comparison_type: Optional[OrderByComparisonType] = Field(
-        None, alias='orderByComparisonType'
+        None, alias="orderByComparisonType"
     )
     projection: Optional[List[ResultField]] = None
     """
-    Specifies the result fields to project. When a field value is given here, the corresponding field will be present in all returned results, and all unspecified fields will be excluded. If no projection is specified, all result fields will be returned.
+    Specifies the result fields to project. When a field value is given here, the corresponding
+    field will be present in all returned results, and all unspecified fields will be excluded.
+    If no projection is specified, all result fields will be returned.
     """
     take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of products to return.
     """
     continuation_token: Optional[str] = Field(
-        None, alias='continuationToken', example='token'
+        None, alias="continuationToken", example="token"
     )
     """
-    A token which allows the user to resume a query at the next item in the matching product set. When querying for products, a token will be returned if a query may be continued. To obtain the next page of products, pass the token to the service on a subsequent request.
+    A token which allows the user to resume a query at the next item in the matching product set.
+    When querying for products, a token will be returned if a query may be continued.
+    To obtain the next page of products, pass the token to the service on a subsequent request.
     """
-    return_count: Optional[bool] = Field(False, alias='returnCount', example=False)
+    return_count: Optional[bool] = Field(False, alias="returnCount", example=False)
     """
-    Whether to return the total number of products which match the provided filter, disregarding the take value.
+    Whether to return the total number of products which match the provided filter, disregarding
+    the take value.
     """
-    response_format: Optional[ResponseFormat] = Field('JSON', alias='responseFormat')
+    response_format: Optional[ResponseFormat] = Field("JSON", alias="responseFormat")
 
 
 class StepsAdvancedQuery(JsonModel):
@@ -899,46 +939,59 @@ class StepsAdvancedQuery(JsonModel):
     """
     substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=[2.5])
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression are
+    indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in
+    the given expression will be replaced by the element at the corresponding index (zero-based)
+    in this list. For example, "@0" in the filter expression will be replaced with the element at
+    the zeroth index of the substitutions list.
     """
     result_filter: Optional[str] = Field(
         None,
-        alias='resultFilter',
+        alias="resultFilter",
         example='(programName != "mySequence.seq") && (operator == @0)',
     )
     """
     The result query filter in Dynamic Linq.
     """
     result_substitutions: Optional[List[Dict[str, Any]]] = Field(
-        None, alias='resultSubstitutions', example=['user1']
+        None, alias="resultSubstitutions", example=["user1"]
     )
     """
-    Makes substitutions in the query filter expression for results. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression for results. Substitutions for the query
+    expression are indicated by non-negative integers that are prefixed with the "at" symbol.
+    Each substitution in the given expression will be replaced by the element at the corresponding
+    index (zero-based) in this list. For example, "@0" in the filter expression will be replaced
+    with the element at the zeroth index of the substitutions list.
     """
-    order_by: Optional[StepQueryOrderByField] = Field(None, alias='orderBy')
+    order_by: Optional[StepQueryOrderByField] = Field(None, alias="orderBy")
     descending: Optional[bool] = Field(False, example=False)
     """
     -> Whether to return the steps in descending order.
     """
     projection: Optional[List[StepField]] = None
     """
-    Specifies the step fields to project. When a field value is given here, the corresponding field will be present in all returned steps, and all unspecified fields will be excluded. If no projection is specified, all step fields will be returned.
+    Specifies the step fields to project. When a field value is given here, the corresponding
+    field will be present in all returned steps, and all unspecified fields will be excluded.
+    If no projection is specified, all step fields will be returned.
     """
     take: Optional[int] = Field(None, example=1000, le=1000, ge=0)
     """
     The maximum number of steps to return.
     """
     continuation_token: Optional[str] = Field(
-        None, alias='continuationToken', example='token'
+        None, alias="continuationToken", example="token"
     )
     """
-    A token which allows the user to resume a query at the next item in the matching step set. When querying for steps, a token will be returned if a query may be continued. To obtain the next page of steps, pass the token to the service on a subsequent request.
+    A token which allows the user to resume a query at the next item in the matching step set.
+    When querying for steps, a token will be returned if a query may be continued. To obtain the
+    next page of steps, pass the token to the service on a subsequent request.
     """
-    return_count: Optional[bool] = Field(False, alias='returnCount', example=False)
+    return_count: Optional[bool] = Field(False, alias="returnCount", example=False)
     """
-    Whether to return the total number of steps which match the provided filter, disregarding the take value.
+    Whether to return the total number of steps which match the provided filter, disregarding the
+    take value.
     """
-    response_format: Optional[ResponseFormat] = Field('JSON', alias='responseFormat')
+    response_format: Optional[ResponseFormat] = Field("JSON", alias="responseFormat")
 
 
 class ProductValuesQuery(JsonModel):
@@ -949,9 +1002,13 @@ class ProductValuesQuery(JsonModel):
     """
     substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=[2.5])
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression are
+    indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in
+    the given expression will be replaced by the element at the corresponding index (zero-based)
+    in this list. For example, "@0" in the filter expression will be replaced with the element at
+    the zeroth index of the substitutions list.
     """
-    starts_with: Optional[str] = Field(None, alias='startsWith', example='cR')
+    starts_with: Optional[str] = Field(None, alias="startsWith", example="cR")
     """
     Only return string values prefixed by this value (case sensitive).
     """
@@ -963,11 +1020,15 @@ class ResultValuesQuery(JsonModel):
     """
     A Dynamic Linq query which specifies the results to consider when getting values.
     """
-    substitutions:  Optional[List[Union[int, str]]] = Field(None, example=[2.5])
+    substitutions: Optional[List[Union[int, str]]] = Field(None, example=[2.5])
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression are
+    indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in
+    the given expression will be replaced by the element at the corresponding index (zero-based) in
+    this list. For example, "@0" in the filter expression will be replaced with the element at the
+    zeroth index of the substitutions list.
     """
-    starts_with: Optional[str] = Field(None, alias='startsWith', example='op')
+    starts_with: Optional[str] = Field(None, alias="startsWith", example="op")
     """
     Only return string values prefixed by this value (case sensitive).
     """
@@ -981,9 +1042,13 @@ class StepValuesQuery(JsonModel):
     """
     substitutions: Optional[List[Dict[str, Any]]] = Field(None, example=[2.5])
     """
-    Makes substitutions in the query filter expression. Substitutions for the query expression are indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in the given expression will be replaced by the element at the corresponding index (zero-based) in this list. For example, "@0" in the filter expression will be replaced with the element at the zeroth index of the substitutions list.
+    Makes substitutions in the query filter expression. Substitutions for the query expression are
+    indicated by non-negative integers that are prefixed with the "at" symbol. Each substitution in
+    the given expression will be replaced by the element at the corresponding index (zero-based) in
+    this list. For example, "@0" in the filter expression will be replaced with the element at the
+    zeroth index of the substitutions list.
     """
-    starts_with: Optional[str] = Field(None, alias='startsWith', example='op')
+    starts_with: Optional[str] = Field(None, alias="startsWith", example="op")
     """
     Only return string values prefixed by this value (case sensitive).
     """
@@ -991,15 +1056,15 @@ class StepValuesQuery(JsonModel):
 
 class StepIdResultIdPair(JsonModel):
     step_id: str = Field(
-        ..., alias='stepId', example='bd9126f5-b0b1-446a-8b08-dc6460047377'
+        ..., alias="stepId", example="bd9126f5-b0b1-446a-8b08-dc6460047377"
     )
     result_id: str = Field(
-        ..., alias='resultId', example='02600cf8-c2bb-4ff9-a139-031e943fb0c0'
+        ..., alias="resultId", example="02600cf8-c2bb-4ff9-a139-031e943fb0c0"
     )
 
 
 class StepDataObject(JsonModel):
-    text: Optional[str] = Field(None, example='My output string')
+    text: Optional[str] = Field(None, example="My output string")
     """
     Text string describing the output data
     """
@@ -1007,16 +1072,16 @@ class StepDataObject(JsonModel):
         None,
         example=[
             {
-                'name': 'Voltage',
-                'status': 'Passed',
-                'measurement': '3.725',
-                'lowLimit': '3.65',
-                'highLimit': '3.8',
-                'nominalValue': '3.7',
-                'units': 'volt',
-                'comparisonType': 'GELE',
+                "name": "Voltage",
+                "status": "Passed",
+                "measurement": "3.725",
+                "lowLimit": "3.65",
+                "highLimit": "3.8",
+                "nominalValue": "3.7",
+                "units": "volt",
+                "comparisonType": "GELE",
             },
-            {'nitmParameterType': 'ADDITIONAL_RESULTS', 'additionalProp': 'myValue'},
+            {"nitmParameterType": "ADDITIONAL_RESULTS", "additionalProp": "myValue"},
         ],
     )
     """
@@ -1032,16 +1097,16 @@ class TestStepsDeleteRequest(JsonModel):
 
 
 class TestStepRequestObject(JsonModel):
-    step_id: Optional[str] = Field(None, alias='stepId', example='Step1')
+    step_id: Optional[str] = Field(None, alias="stepId", example="Step1")
     """
     Step id
     """
-    parent_id: Optional[str] = Field(None, alias='parentId', example='root')
+    parent_id: Optional[str] = Field(None, alias="parentId", example="root")
     """
     Parent step id
     """
     result_id: Optional[str] = Field(
-        None, alias='resultId', example='02600cf8-c2bb-4ff9-a139-031e943fb0c0'
+        None, alias="resultId", example="02600cf8-c2bb-4ff9-a139-031e943fb0c0"
     )
     """
     Result id
@@ -1051,27 +1116,27 @@ class TestStepRequestObject(JsonModel):
     Nested child steps
     """
     data: Optional[StepDataObject] = None
-    data_model: Optional[str] = Field(None, alias='dataModel', example='TestStand')
+    data_model: Optional[str] = Field(None, alias="dataModel", example="TestStand")
     """
     Data model for the step
     """
-    name: Optional[str] = Field(None, example='My Step')
+    name: Optional[str] = Field(None, example="My Step")
     """
     Step name
     """
     started_at: Optional[datetime] = Field(
-        None, alias='startedAt', example='2018-05-07T18:58:05.219692Z'
+        None, alias="startedAt", example="2018-05-07T18:58:05.219692Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the test result began
     """
     status: Optional[StatusObject] = None
-    step_type: Optional[str] = Field(None, alias='stepType', example='NumericLimitTest')
+    step_type: Optional[str] = Field(None, alias="stepType", example="NumericLimitTest")
     """
     Step type
     """
     total_time_in_seconds: Optional[float] = Field(
-        0.0, alias='totalTimeInSeconds', example=29.9
+        0.0, alias="totalTimeInSeconds", example=29.9
     )
     """
     Total number of seconds the step took to execute
@@ -1092,7 +1157,7 @@ class TestStepCreateOrUpdateRequestObject(JsonModel):
     Array of test steps to create
     """
     update_result_total_time: Optional[bool] = Field(
-        False, alias='updateResultTotalTime'
+        False, alias="updateResultTotalTime"
     )
     """
     Determine test result total time from the test step total times.
@@ -1100,53 +1165,53 @@ class TestStepCreateOrUpdateRequestObject(JsonModel):
 
 
 class TestStepResponseObject(JsonModel):
-    name: Optional[str] = Field(None, example='My Step Name')
+    name: Optional[str] = Field(None, example="My Step Name")
     """
     Step name
     """
-    step_type: Optional[str] = Field(None, alias='stepType', example='NumericLimitTest')
+    step_type: Optional[str] = Field(None, alias="stepType", example="NumericLimitTest")
     """
     Step type
     """
-    step_id: Optional[str] = Field(None, alias='stepId', example='Step1')
+    step_id: Optional[str] = Field(None, alias="stepId", example="Step1")
     """
     Step id
     """
-    parent_id: Optional[str] = Field(None, alias='parentId', example='root')
+    parent_id: Optional[str] = Field(None, alias="parentId", example="root")
     """
     Parent step id
     """
     result_id: Optional[str] = Field(
-        None, alias='resultId', example='02600cf8-c2bb-4ff9-a139-031e943fb0c0'
+        None, alias="resultId", example="02600cf8-c2bb-4ff9-a139-031e943fb0c0"
     )
     """
     Result id
     """
-    path: Optional[str] = Field(None, example='root.My Step Name')
+    path: Optional[str] = Field(None, example="root.My Step Name")
     """
     Step path
     """
     path_ids: Optional[List[str]] = Field(
-        None, alias='pathIds', example=['root', 'Step1']
+        None, alias="pathIds", example=["root", "Step1"]
     )
     """
     Ids of the steps in the path
     """
     status: Optional[StatusObject] = None
     total_time_in_seconds: Optional[float] = Field(
-        None, alias='totalTimeInSeconds', example=0.0
+        None, alias="totalTimeInSeconds", example=0.0
     )
     """
     Total number of seconds the step took to execute
     """
     started_at: Optional[datetime] = Field(
-        None, alias='startedAt', example='2018-05-07T18:58:05.219692Z'
+        None, alias="startedAt", example="2018-05-07T18:58:05.219692Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the test result began
     """
     updated_at: Optional[datetime] = Field(
-        None, alias='updatedAt', example='2018-05-09T15:07:42.527921Z'
+        None, alias="updatedAt", example="2018-05-09T15:07:42.527921Z"
     )
     """
     ISO-8601 formatted timestamp indicating when the result was last updated
@@ -1159,22 +1224,19 @@ class TestStepResponseObject(JsonModel):
     """
     Outputs and their values logged by the test
     """
-    data_model: Optional[str] = Field(None, alias='dataModel', example='TestStand')
+    data_model: Optional[str] = Field(None, alias="dataModel", example="TestStand")
     """
     Custom string defining the model of the data object
     """
     data: Optional[StepDataObject] = None
-    has_children: Optional[bool] = Field(None, alias='hasChildren', example=False)
+    has_children: Optional[bool] = Field(None, alias="hasChildren", example=False)
     """
-    Whether this step object has any children step objects. When false, this means that this step object is a leaf node.
+    Whether this step object has any children step objects. When false, this means that this
+    step object is a leaf node.
     """
     workspace: Optional[str] = Field(
-        None, example='f94b178e-288c-4101-afb1-833992413aa7'
+        None, example="f94b178e-288c-4101-afb1-833992413aa7"
     )
     """
     The workspace the test step belongs to
     """
-
-
-# Error.model_rebuild()
-# TestStepRequestObject.model_rebuild()

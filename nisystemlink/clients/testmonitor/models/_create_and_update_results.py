@@ -5,8 +5,8 @@ from nisystemlink.clients.core._uplink._json_model import JsonModel
 
 from ._testmonitor_models import (
     Error,
-    TestResultResponseObject,
     TestResultRequestObject,
+    TestResultResponseObject,
     TestResultUpdateFailureObject,
 )
 
@@ -16,6 +16,7 @@ class CreateTestResultsRequest(JsonModel):
     """
     Array of results to be created.
     """
+
 
 class CreateResultPartialSuccessResponse(JsonModel):
     results: List[TestResultResponseObject]
@@ -45,4 +46,3 @@ class ResultUpdatePartialSuccessResponse(JsonModel):
     """
     Default error model.
     """
- 

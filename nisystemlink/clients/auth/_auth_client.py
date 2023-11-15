@@ -16,7 +16,7 @@ class AuthClient(BaseClient):
         Args:
             configuration: Defines the web server to connect to and information about
                 how to connect. If not provided, an instance of
-                :class:`JupyterHttpConfiguration <nisystemlink.clients.core.JupyterHttpConfiguration>`
+                :class:`JupyterHttpConfiguration <nisystemlink.clients.core.JupyterHttpConfiguration>` # noqa: W505.
                 is used.
 
         Raises:

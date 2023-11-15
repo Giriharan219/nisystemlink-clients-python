@@ -24,6 +24,8 @@ from nisystemlink.clients.testmonitor.models import (
 )
 
 api_info = AuthClient().get_auth()
+if api_info.workspaces is not None:
+    WORK_SPACE_ID = api_info.workspaces[0].id
 
 # Constants used in request and response.
 PART_NUMBER_PREFIX = "Test"
@@ -37,7 +39,7 @@ TAKE_COUNT = 1000
 STATUS_TYPE = "PASSED"
 STATUS_NAME = "passed"
 HOST_NAME = "My-Host"
-WORK_SPACE_ID = api_info.workspaces[0].id
+
 TOTAL_TIME_IN_SECONDS = 2.7
 INVALID_ID = "invalid_id12323"
 MAX_TIME_DIFF_IN_SECONDS = 20
@@ -151,7 +153,7 @@ class TestSuiteTestMonitorClientResults:
         create_result: Callable,
         create_result_request: Callable,
     ):
-        """Test the case of a completely successful create results API."""
+        """Test a fully successful create results API case."""
         request_object = [create_result_request()]
         request_body = CreateTestResultsRequest(results=request_object)
         response = create_result(request_body)
@@ -175,7 +177,7 @@ class TestSuiteTestMonitorClientResults:
         create_result: Callable,
         create_result_request: Callable,
     ):
-        """Test the case of a partially successful create results API."""
+        """Test a partially successful create results API."""
         valid_result = create_result_request()
         duplicate_result = TestResultRequestObject(
             program_name=PROGRAM_NAME,
@@ -196,7 +198,7 @@ class TestSuiteTestMonitorClientResults:
         client: TestMonitorClient,
         create_test_results: List[TestResultResponseObject],
     ):
-        """Test the case of completely successful get result API."""
+        """Test complete successful get result API."""
         test_result = create_test_results[0]
         test_result_details = client.get_result(test_result.id)
 
@@ -216,36 +218,36 @@ class TestSuiteTestMonitorClientResults:
         )
 
     def test__get_result__invalid_id(self, client: TestMonitorClient):
-        """Test the case of get result API with invalid id."""
+        """Test get result API with invalid id."""
         with pytest.raises(ApiException, match="404 Not Found"):
             client.get_result(INVALID_ID)
 
     def test__query_results(self, client: TestMonitorClient):
-
+        """Test query results API"""
         result_query_body = ResultsAdvancedQuery(
             filter=FILTER,
             substitutions=SUBSTITUTIONS,
             orderBy=ResultQueryOrderByField.PROGRAM_NAME,
-            descending=False,
             projection=PROJECTION,
+            descending=False,
             returnCount=True,
         )
 
         query_response = client.query_results(result_query_body)
-        
+
         assert query_response.results is not None
         assert query_response.continuation_token is not None
         assert query_response.total_count is not None
         assert query_response.total_count > 0
 
     def test__get_results(self, client: TestMonitorClient):
-
+        """Test get results API."""
         get_results_response = client.get_results(
             returnCount=True,
             take=TAKE_COUNT,
             continuationToken=None,
         )
-        
+
         assert get_results_response.total_count is not None
         assert get_results_response.total_count > 0
         assert get_results_response.continuation_token is not None
@@ -258,7 +260,7 @@ class TestSuiteTestMonitorClientResults:
         create_result: Callable,
         create_result_request: Callable,
     ):
-
+        """Test delete result API."""
         result_details = create_result_request()
         request_body = CreateTestResultsRequest(results=[result_details])
         new_result = create_result(request_body)
@@ -277,7 +279,7 @@ class TestSuiteTestMonitorClientResults:
         create_result: Callable,
         create_result_request: Callable,
     ):
-
+        """Test delete results API."""
         result_details = [create_result_request() for _ in range(3)]
         request_body = CreateTestResultsRequest(results=result_details)
         created_results = create_result(request_body)
@@ -298,7 +300,7 @@ class TestSuiteTestMonitorClientResults:
         create_test_results: List[TestResultResponseObject],
         update_result_request: Callable,
     ):
-
+        """Test update result API with replace key."""
         new_result_info = update_result_request(create_test_results[1].id)
         request_body = UpdateTestResultsRequest(results=[new_result_info], replace=True)
         response = client.update_results(request_body)
@@ -316,19 +318,23 @@ class TestSuiteTestMonitorClientResults:
         create_test_results: List[TestResultResponseObject],
         update_result_request: Callable,
     ):
+        """Test update result API without replace key."""
         existing_result = client.get_result(create_test_results[1].id)
         print(existing_result)
         new_result_info = update_result_request(id=create_test_results[1].id)
-        request_body = UpdateTestResultsRequest(
-            results=[new_result_info], replace=False
-        )
+        request_body = UpdateTestResultsRequest(results=[new_result_info])
         response = client.update_results(request_body)
         updated_result = response.results[0]
         # print(updated_result)
-       
+
         assert updated_result.program_name == existing_result.program_name
-        assert updated_result.keywords is not None and existing_result.keywords is not None
-        assert updated_result.properties is not None and existing_result.properties is not None
+        assert (
+            updated_result.keywords is not None and existing_result.keywords is not None
+        )
+        assert (
+            updated_result.properties is not None
+            and existing_result.properties is not None
+        )
         assert len(updated_result.keywords) == len(existing_result.keywords) + 1
         assert len(updated_result.properties) == len(existing_result.properties) + 1
 
@@ -338,7 +344,7 @@ class TestSuiteTestMonitorClientResults:
         create_test_results: List[TestResultResponseObject],
         update_result_request: Callable,
     ):
-        """Test the case of a partially successful update results API."""
+        """Test partially successful update results API."""
         valid_result_info = update_result_request(id=create_test_results[3].id)
         invalid_result_info = update_result_request(id=INVALID_ID)
 
@@ -355,7 +361,7 @@ class TestSuiteTestMonitorClientResults:
         assert response.error is not None
 
     def test__query_product_values(self, client: TestMonitorClient):
-        """Test the query result values API."""
+        """Test query result values API."""
         request_body = ResultValuesQuery(
             field=ResultValuesQueryField.PROGRAM_NAME,
             filter=FILTER,

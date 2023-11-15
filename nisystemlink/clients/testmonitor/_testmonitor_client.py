@@ -5,7 +5,7 @@ from nisystemlink.clients import core
 from nisystemlink.clients.core._uplink._base_client import BaseClient
 from nisystemlink.clients.core._uplink._methods import delete, get, post
 from nisystemlink.clients.testmonitor import models
-from uplink import Query
+from uplink import Path, Query
 
 
 class TestMonitorClient(BaseClient):
@@ -100,8 +100,8 @@ class TestMonitorClient(BaseClient):
         """
         ...
 
-    @delete("results/{resultId}")
-    def delete_result(self, resultId: str, deleteSteps: Query(type=bool) = True) -> None:
+    @delete("results/{resultId}", args=[Path, Query])
+    def delete_result(self, resultId: str, deleteSteps: bool) -> None:
         """Delete a test result.
 
         Args:

@@ -368,6 +368,3 @@ class PolicyTemplate(JsonModel):
     """
     A list of statements defining the actions the user can perform on a resource
     """
-
-
-Error.update_forward_refs()

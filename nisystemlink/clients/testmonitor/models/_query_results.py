@@ -1,18 +1,14 @@
 """Query results models."""
+from typing import Any, List, Optional, Union
 
-# Python Modules
-from typing import List, Optional
-
-# Third party Modules
 from nisystemlink.clients.core._uplink._json_model import JsonModel
 from pydantic import Field
-
 
 from ._testmonitor_models import TestResultResponseObject
 
 
 class ResultsQueryResponse(JsonModel):
-    results: List[TestResultResponseObject]
+    results: Union[List[TestResultResponseObject], Any]
     """
     Array of results.
     """
