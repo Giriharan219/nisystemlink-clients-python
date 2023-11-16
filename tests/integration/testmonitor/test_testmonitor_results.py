@@ -1,7 +1,7 @@
 """Implementation of test class for results APIs of TestMonitor."""
 import uuid
 from datetime import datetime
-from typing import Callable, List
+from typing import Callable, List, Optional
 
 import pytest
 from nisystemlink.clients.auth import AuthClient
@@ -21,14 +21,14 @@ from nisystemlink.clients.testmonitor.models import (
     TestResultUpdateRequestObject,
     UpdateTestResultsRequest,
 )
-from tests.integration.testmonitor_client.constants import (
+from tests.integration.testmonitor.constants import (
     CreateResultRequest,
     QueryResults,
     UpdateResults,
 )
 
 
-def get_workspace_id() -> str:
+def get_workspace_id() -> Optional[str]:
     """Get Workspace ID.
 
     Args:
@@ -39,8 +39,9 @@ def get_workspace_id() -> str:
     api_info = AuthClient().get_auth()
     if api_info.workspaces is not None:
         work_space_id = api_info.workspaces[0].id
+        return work_space_id
 
-    return work_space_id
+    return None
 
 
 @pytest.fixture(scope="class")
@@ -127,7 +128,7 @@ def update_result_request():
         result_request_details = TestResultUpdateRequestObject(
             id=id,
             status=StatusObject(statusType=StatusType.PASSED, statusName=status_name),
-            programName=name,
+            program_name=name,
             keywords=keywords,
             properties=properties,
         )
@@ -221,10 +222,10 @@ class TestSuiteTestMonitorClientResults:
         result_query_body = ResultsAdvancedQuery(
             filter=QueryResults.FILTER,
             substitutions=QueryResults.SUBSTITUTIONS,
-            orderBy=ResultQueryOrderByField.PROGRAM_NAME,
+            order_by=ResultQueryOrderByField.PROGRAM_NAME,
             projection=QueryResults.PROJECTION,
             descending=False,
-            returnCount=True,
+            return_count=True,
         )
 
         query_response = client.query_results(result_query_body)
@@ -361,7 +362,7 @@ class TestSuiteTestMonitorClientResults:
             field=ResultValuesQueryField.PROGRAM_NAME,
             filter=QueryResults.FILTER,
             substitutions=QueryResults.SUBSTITUTIONS,
-            startsWith=QueryResults.STARTS_WITH,
+            starts_with=QueryResults.STARTS_WITH,
         )
 
         response = client.query_result_values(request_body)
